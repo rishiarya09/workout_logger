@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { exercises } from "../../lib/data";
+import { exercises } from "../../../lib/data";
 
 export default function PlansPage() {
   const [planName, setPlanName] = useState("");
