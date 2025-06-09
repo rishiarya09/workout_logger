@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { exercises } from "../../../lib/data";
 
 export default function PlansPage() {
@@ -7,10 +7,18 @@ export default function PlansPage() {
   const [selectedExercises, setSelectedExercises] = useState([]);
   const [plans, setPlans] = useState([]);
 
-  const toggleExercise = (name) => {
-    setSelectedExercises((prev) =>
-      prev.includes(name) ? prev.filter((e) => e !== name) : [...prev, name]
-    );
+  // Use useEffect to retrive list of exercises with id's,
+
+  const toggleExercise = (ex) => {
+    setSelectedExercises((prev) => {
+      const selectedEx = ex.name;
+      const exerciseFlag = prev.some((exe) => exe.name === selectedEx);
+      if (exerciseFlag) {
+        return prev.filter((e) => e.name !== selectedEx);
+      } else {
+        return [...prev, ex];
+      }
+    });
   };
 
   const savePlan = () => {
@@ -19,6 +27,10 @@ export default function PlansPage() {
     setPlanName("");
     setSelectedExercises([]);
   };
+
+  useEffect(() => {
+    console.log(plans);
+  });
 
   return (
     <div className="p-6">
@@ -36,15 +48,18 @@ export default function PlansPage() {
           <label key={i} className="block">
             <input
               type="checkbox"
-              checked={selectedExercises.includes(ex.name)}
-              onChange={() => toggleExercise(ex.name)}
+              checked={selectedExercises.some((obj) => obj.name === ex.name)}
+              onChange={() => toggleExercise(ex)}
             />{" "}
             {ex.name}
           </label>
         ))}
       </div>
 
-      <button className="bg-green-500 text-white px-4 py-2 rounded" onClick={savePlan}>
+      <button
+        className="bg-green-500 text-white px-4 py-2 rounded"
+        onClick={savePlan}
+      >
         Save Plan
       </button>
 
@@ -54,7 +69,9 @@ export default function PlansPage() {
           <div key={i} className="mt-2 p-2 border rounded">
             <strong>{p.name}</strong>
             <ul className="list-disc ml-4">
-              {p.exercises.map((e, idx) => <li key={idx}>{e}</li>)}
+              {p.exercises.map((e, idx) => (
+                <li key={idx}>{e.name}</li>
+              ))}
             </ul>
           </div>
         ))}

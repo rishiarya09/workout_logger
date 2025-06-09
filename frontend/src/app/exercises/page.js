@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { categries, exercises as initialExercises } from "../../../lib/data";
+import { catagories, exercises as initialExercises } from "../../../lib/data";
 
 export default function ExercisePage() {
     const [exerciseList, setExerciseList ] = useState(initialExercises);
@@ -30,7 +30,7 @@ export default function ExercisePage() {
           value={newExercise.category}
           onChange={(e) => setNewExercise({ ...newExercise, category: e.target.value })}
         >          <option value="">Select Category</option>
-          {categories.map((cat, i) => <option key={i} value={cat}>{cat}</option>)}
+          {catagories.map((cat, i) => <option key={i} value={cat}>{cat}</option>)}
         </select>
         <button onClick={handleAdd} className="bg-blue-500 text-white px-4 py-2 rounded">
           Add Exercise
