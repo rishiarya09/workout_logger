@@ -21,20 +21,26 @@ let ExerciseCategoriesController = class ExerciseCategoriesController {
     constructor(exerciseCategoriesService) {
         this.exerciseCategoriesService = exerciseCategoriesService;
     }
-    create(createExerciseCategoryDto) {
-        return this.exerciseCategoriesService.create(createExerciseCategoryDto);
+    async create(createExerciseCategoryDto) {
+        const res_create = await this.exerciseCategoriesService.create(createExerciseCategoryDto);
+        let res = { message: "", data: {} };
+        if (res_create) {
+            res.message = "New Category Created Succesfully",
+                res.data = res_create;
+        }
+        return res;
     }
     findAll() {
         return this.exerciseCategoriesService.findAll();
     }
     findOne(id) {
-        return this.exerciseCategoriesService.findOne(+id);
+        return this.exerciseCategoriesService.findOne(id);
     }
     update(id, updateExerciseCategoryDto) {
-        return this.exerciseCategoriesService.update(+id, updateExerciseCategoryDto);
+        return this.exerciseCategoriesService.update(id, updateExerciseCategoryDto);
     }
     remove(id) {
-        return this.exerciseCategoriesService.remove(+id);
+        return this.exerciseCategoriesService.remove(id);
     }
 };
 exports.ExerciseCategoriesController = ExerciseCategoriesController;
@@ -43,7 +49,7 @@ __decorate([
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [create_exercise_category_dto_1.CreateExerciseCategoryDto]),
-    __metadata("design:returntype", void 0)
+    __metadata("design:returntype", Promise)
 ], ExerciseCategoriesController.prototype, "create", null);
 __decorate([
     (0, common_1.Get)(),
@@ -74,7 +80,7 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], ExerciseCategoriesController.prototype, "remove", null);
 exports.ExerciseCategoriesController = ExerciseCategoriesController = __decorate([
-    (0, common_1.Controller)('exercise-categories'),
+    (0, common_1.Controller)('exercise_categories'),
     __metadata("design:paramtypes", [exercise_categories_service_1.ExerciseCategoriesService])
 ], ExerciseCategoriesController);
 //# sourceMappingURL=exercise_categories.controller.js.map

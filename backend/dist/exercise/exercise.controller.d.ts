@@ -3,7 +3,7 @@ import { Exercise } from './entities/exercise.entity';
 export declare class ExerciseController {
     private readonly exerciseService;
     constructor(exerciseService: ExerciseService);
-    create(createExerciseDto: Exercise): Promise<Exercise>;
+    create(createExerciseDto: Exercise): Promise<any>;
     findAll(): Promise<Exercise[]>;
     findOne(id: string): Promise<Exercise>;
     update(id: string, updateExerciseDto: Partial<Exercise>): Promise<Exercise>;

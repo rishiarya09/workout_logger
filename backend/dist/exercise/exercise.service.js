@@ -22,14 +22,23 @@ let ExerciseService = class ExerciseService {
         this.excersieRepo = excersieRepo;
     }
     async create(createExerciseDto) {
+        const name = createExerciseDto.name;
+        const existing = await this.excersieRepo.findOne({ where: { name } });
+        if (existing)
+            return existing;
         const exercise = this.excersieRepo.create(createExerciseDto);
-        return this.excersieRepo.save(exercise);
+        const saved = await this.excersieRepo.save(exercise);
+        return this.excersieRepo.findOne({
+            where: { id: saved.id },
+            relations: [`category`]
+        });
     }
     async findAll() {
-        return this.excersieRepo.find();
+        return this.excersieRepo.find({ relations: ['category'], });
     }
     async findOne(id) {
-        return this.excersieRepo.findOne({ where: { id } });
+        return this.excersieRepo.findOne({ where: { id },
+            relations: ['category'] });
     }
     async update(id, updateExerciseDto) {
         const updatedexercise = this.excersieRepo.update(id, updateExerciseDto);

@@ -4,7 +4,7 @@ export declare class Exercise {
     category: ExerciseCategory;
     description: string;
     name: string;
-    videoUrl: string;
+    video_url: string;
     created_at: string;
     updated_at: string;
 }

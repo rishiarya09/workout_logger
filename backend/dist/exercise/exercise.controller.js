@@ -21,7 +21,16 @@ let ExerciseController = class ExerciseController {
         this.exerciseService = exerciseService;
     }
     async create(createExerciseDto) {
-        return this.exerciseService.create(createExerciseDto);
+        const serv_res = await this.exerciseService.create(createExerciseDto);
+        const res = {
+            message: "",
+            data: {}
+        };
+        if (serv_res) {
+            res.message = "New Exercise created successfully";
+            res.data = serv_res;
+        }
+        return res;
     }
     async findAll() {
         return this.exerciseService.findAll();

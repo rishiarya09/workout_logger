@@ -10,11 +10,14 @@ exports.ExerciseCategoriesModule = void 0;
 const common_1 = require("@nestjs/common");
 const exercise_categories_service_1 = require("./exercise_categories.service");
 const exercise_categories_controller_1 = require("./exercise_categories.controller");
+const typeorm_1 = require("@nestjs/typeorm");
+const exercise_category_entity_1 = require("./entities/exercise_category.entity");
 let ExerciseCategoriesModule = class ExerciseCategoriesModule {
 };
 exports.ExerciseCategoriesModule = ExerciseCategoriesModule;
 exports.ExerciseCategoriesModule = ExerciseCategoriesModule = __decorate([
     (0, common_1.Module)({
+        imports: [typeorm_1.TypeOrmModule.forFeature([exercise_category_entity_1.ExerciseCategory])],
         controllers: [exercise_categories_controller_1.ExerciseCategoriesController],
         providers: [exercise_categories_service_1.ExerciseCategoriesService],
     })

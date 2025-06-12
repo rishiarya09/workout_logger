@@ -9,8 +9,18 @@ export class ExerciseController {
   constructor(private readonly exerciseService: ExerciseService) {}
 
   @Post()
-  async create(@Body() createExerciseDto: Exercise): Promise<Exercise> {
-    return this.exerciseService.create(createExerciseDto);
+  async create(@Body() createExerciseDto: Exercise): Promise<any> {
+    const serv_res = await this.exerciseService.create(createExerciseDto);
+    const res = {
+      message: "",
+      data: {}
+    };
+
+    if(serv_res) {
+      res.message = "New Exercise created successfully";
+      res.data = serv_res;
+    }
+    return res;
   }
 
   @Get()

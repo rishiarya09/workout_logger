@@ -20,6 +20,7 @@ __decorate([
     __metadata("design:type", String)
 ], Exercise.prototype, "id", void 0);
 __decorate([
+    (0, typeorm_1.JoinColumn)({ name: 'category_id' }),
     (0, typeorm_1.ManyToOne)(() => exercise_category_entity_1.ExerciseCategory),
     __metadata("design:type", exercise_category_entity_1.ExerciseCategory)
 ], Exercise.prototype, "category", void 0);
@@ -34,7 +35,7 @@ __decorate([
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
-], Exercise.prototype, "videoUrl", void 0);
+], Exercise.prototype, "video_url", void 0);
 __decorate([
     (0, typeorm_1.Column)({ type: 'date' }),
     __metadata("design:type", String)
@@ -44,6 +45,6 @@ __decorate([
     __metadata("design:type", String)
 ], Exercise.prototype, "updated_at", void 0);
 exports.Exercise = Exercise = __decorate([
-    (0, typeorm_1.Entity)()
+    (0, typeorm_1.Entity)('exercises')
 ], Exercise);
 //# sourceMappingURL=exercise.entity.js.map

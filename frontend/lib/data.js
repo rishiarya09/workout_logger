@@ -92,3 +92,9 @@ const create_plan = {
   planName: "plan Name",
   exercise: exercises,
 };
+
+// check if the exercises is removed or added and then send the edit. (match the exercise id's and see if any new added).
+const edit_plan = {
+  planName: "plan Name",
+  exercises: exercises,
+};
